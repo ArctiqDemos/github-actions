@@ -1,4 +1,4 @@
-name: Generate GitHub App Token
+name: Rotate Github App Private Key
 
 on:
   workflow_dispatch:
