@@ -33,4 +33,4 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'ghcr.io/arctiqdemos/generate-app-token:1.0.0'
+  image: 'docker://ghcr.io/arctiqdemos/generate-app-token:1.0.0'
