@@ -23,10 +23,10 @@ inputs:
   azure_client_secret:
     description: 'The client secret for authenticating with Azure.'
     required: true
-  azure_tenant_id:
+  azure_tenant:
     description: 'The tenant ID for authenticating with Azure.'
     required: true
-  azure_subscription_id:
+  azure_subscription:
     description: 'The subscription ID for accessing Azure resources.'
     required: true
 
