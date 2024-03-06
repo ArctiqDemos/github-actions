@@ -1,0 +1,36 @@
+name: Generate GitHub App Token
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.generate.outputs.token }}
+
+    steps:
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Generate GitHub App Token
+      id: generate
+      uses: ArctiqTeam/a-github-actions/generate-app-token@main
+      with:
+        app_id: 849736
+        installation_id: 48083491
+        kv_url: https://github-secret-store.vault.azure.net
+        kv_secret_name: safe-settings-test
+        azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
+
+    - name: Get Org Repos
+      run: |
+        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"  

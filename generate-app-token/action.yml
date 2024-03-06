@@ -1,0 +1,36 @@
+name: Generate GitHub App Token
+description: Generate a temporary GitHub App token and set it as an output variable
+
+inputs:
+  app_id:
+    description: 'The ID of the GitHub App'
+    required: true
+  installation_id:
+    description: 'The installation ID of the GitHub App.'
+    required: true
+  kv_url:
+    description: 'The URL of the Azure Key Vault where the GitHub App private key is stored.'
+    required: true
+  kv_secret_name:
+    description: 'The name of the secret (private key) in the Azure Key Vault.'
+    required: true
+  azure_client_id:
+    description: 'The client ID of the Azure application'
+    required: true
+  azure_client_secret:
+    description: 'The client secret of the Azure application'
+    required: true
+  azure_subscription:
+    description: 'The ID of the Azure subscription'
+    required: true
+  azure_tenant:
+    description: 'The ID of the Azure Active Directory tenant'
+    required: true
+
+outputs:
+  token:
+    description: 'The generated GitHub App token'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/arctiqteam/generate-app-token:1.0.0'
