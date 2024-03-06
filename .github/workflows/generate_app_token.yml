@@ -20,7 +20,7 @@ jobs:
 
     - name: Generate GitHub App Token
       id: generate
-      uses: ArctiqTeam/a-github-actions/generate-app-token@main
+      uses: ArctiqDemos/github-actions/generate-app-token@main
       with:
         app_id: 849736
         installation_id: 48083491
