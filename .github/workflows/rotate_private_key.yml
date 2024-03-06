@@ -5,7 +5,7 @@ on:
 
 
 jobs:
-  generate-token:
+  rotate-github-app-private-key:
     runs-on: ubuntu-latest
     outputs:
       token: ${{ steps.generate.outputs.token }}
