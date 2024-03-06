@@ -33,6 +33,6 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/arctiqdemos/generate-app-token:1.0.0'
+  image: 'ghcr.io/arctiqdemos/generate-app-token:1.0.0'
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
