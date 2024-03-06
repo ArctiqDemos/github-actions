@@ -39,7 +39,7 @@ def update_private_key_in_keyvault(vault_url, secret_name, new_private_key):
 
 def main():
     # Generate a new private key for the GitHub App
-    new_private_key = generate_new_private_key(app_id, installation_id, token)
+    new_private_key = generate_new_private_key(installation_id, token)
     if new_private_key:
         # Update the private key in Azure Key Vault
         update_private_key_in_keyvault(kv_url, kv_secret_name, new_private_key)
