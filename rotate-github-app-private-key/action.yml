@@ -1,5 +1,5 @@
-name: Generate GitHub App Token
-description: Generate a temporary GitHub App token and set it as an output variable
+name: Rotate Github App Private Key
+description: Rotate a Github App Private in Azure Key Vault
 
 inputs:
   app_id:
