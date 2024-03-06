@@ -1,0 +1,40 @@
+name: Generate GitHub App Token
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.generate.outputs.token }}
+
+    steps:
+    - name: Generate GitHub App Token
+      id: generate
+      uses: ArctiqDemos/github-actions/generate-app-token@main
+      with:
+        app_id: 849736
+        installation_id: 48083491
+        kv_url: https://github-secret-store.vault.azure.net
+        kv_secret_name: safe-settings-test
+        azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
+
+    - name: Rotate Github App Private Key
+      id: rotate
+      uses: ArctiqDemos/github-actions/rotate-github-app-private-key@main
+      with:
+        app_id: 849736
+        installation_id: 48083491
+        kv_url: https://github-secret-store.vault.azure.net
+        kv_secret_name: safe-settings-test
+        azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
+        token: ${{ steps.generate.outputs.token }}
+
