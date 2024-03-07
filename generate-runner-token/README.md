@@ -71,5 +71,5 @@ jobs:
       with:
         org_name: ArctiqDemos
         repo_name: github-actions
-        github_token: ${{ steps.auth.outputs.token }} # Using a short lived JWT token that was generated in the first step.
+        github_token: ${{ steps.auth.outputs.token }} # Using a short lived JWT that was generated in the first step.
 ```
