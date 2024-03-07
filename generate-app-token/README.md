@@ -55,7 +55,7 @@ jobs:
 
     steps:
     - name: Generate GitHub App Token
-      id: generate
+      id: auth
       uses: ArctiqDemos/github-actions/generate-app-token@main
       with:
         app_id: 849736
@@ -67,7 +67,7 @@ jobs:
         azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Get Self Hosted Runner Credential
+    - name: Get Github Repos
       run: |
-        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
+        curl -H "Authorization: Bearer ${{ steps.auth.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
 ```
