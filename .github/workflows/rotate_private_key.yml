@@ -3,7 +3,6 @@ name: Rotate Github App Private Key
 on:
   workflow_dispatch:
 
-
 jobs:
   rotate-github-app-private-key:
     runs-on: ubuntu-latest
