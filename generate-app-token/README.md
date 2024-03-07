@@ -1,6 +1,6 @@
 # Generate App Token Action
 
-The Generate App Token Action is a GitHub Action that generates a token for a GitHub App installation using the GitHub App's private key stored securely in Azure Key Vault.
+The Generate App Token Action is a GitHub Action that generates a short lived JWT from a GitHub App installation using the GitHub App's private key stored securely in Azure Key Vault.
 
 ### Prerequisites:
 
@@ -13,13 +13,13 @@ The Generate App Token Action is a GitHub Action that generates a token for a Gi
     
 1.  **Github Repository Secrets**:
     
-    **AZURE_SUBSCRIPTION_ID**: This is a unique identifier for your Azure subscription. It's required to specify which Azure subscription you want to access.
+    **`AZURE_SUBSCRIPTION_ID`**: This is a unique identifier for your Azure subscription. It's required to specify which Azure subscription you want to access.
 
-    **AZURE_CLIENT_ID**: (Service Principal ID): When you create a Service Principal in Azure, you receive a unique identifier known as the Client ID. This ID is used to authenticate your application or pipeline with Azure.
+    **`AZURE_CLIENT_ID`**: (Service Principal ID): When you create a Service Principal in Azure, you receive a unique identifier known as the Client ID. This ID is used to authenticate your application or pipeline with Azure.
 
-    **AZURE_CLIENT_SECRET**: (Service Principal Secret): Along with the Client ID, you also receive a Client Secret when creating a Service Principal. The Client Secret acts as the password for the Service Principal and is used for authentication.
+    **`AZURE_CLIENT_SECRET`**: (Service Principal Secret): Along with the Client ID, you also receive a Client Secret when creating a Service Principal. The Client Secret acts as the password for the Service Principal and is used for authentication.
 
-    **AZURE_TENANT_ID**: Azure Tenant ID is a unique identifier for your Azure Active Directory (AD) tenant. It's required for authentication and authorization processes.
+    **`AZURE_TENANT_ID`**: Azure Tenant ID is a unique identifier for your Azure Active Directory (AD) tenant. It's required for authentication and authorization processes.
 
 3.  **GitHub App Configuration**:
     
@@ -34,10 +34,10 @@ The Generate App Token Action is a GitHub Action that generates a token for a Gi
 
 To use the Generate App Token Action in your GitHub Actions workflow, you need to provide the following inputs:
 
-- **Azure Key Vault URL**: The URL of the Azure Key Vault where the GitHub App's private key is stored.
-- **Azure Key Vault Secret Name**: The name of the secret (private key) in the Azure Key Vault.
-- **GitHub App Installation ID**: The installation ID of the GitHub App.
-- **GitHub App ID**: The ID of the GitHub App.
+- **`kv_url`**: The URL of the Azure Key Vault where the GitHub App's private key is stored.
+- **`kv_secret_name`**: The name of the secret (private key) in the Azure Key Vault.
+- **`installation_id`**: The installation ID of the GitHub App.
+- **`app_id`**: The ID of the GitHub App.
 
 Here's an example workflow that uses the Generate App Token Action:
 
@@ -67,7 +67,7 @@ jobs:
         azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Get Self Hosted Runner Credential
+    - name: Get Github Repos
       run: |
         curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
 ```
