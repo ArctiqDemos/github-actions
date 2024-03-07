@@ -69,6 +69,5 @@ jobs:
 
     - name: Get Self Hosted Runner Credential
       run: |
-        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"   
-
+        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
 ```

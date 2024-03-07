@@ -1,8 +1,7 @@
-name: Generate GitHub App Token
+name: Generate Github Runner Token
 
 on:
   workflow_dispatch:
-
 
 jobs:
   generate-token:
@@ -12,7 +11,7 @@ jobs:
 
     steps:
     - name: Generate GitHub App Token
-      id: generate
+      id: auth
       uses: ArctiqDemos/github-actions/generate-app-token@main
       with:
         app_id: 849736
@@ -24,6 +23,10 @@ jobs:
         azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Get Org Repos
-      run: |
-        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"  
+    - name: Get Runner Registration Token
+      id: generate
+      uses: ArctiqDemos/github-actions/generate-runner-token@main
+      with:
+        org_name: ArctiqDemos
+        repo_name: github-actions
+        github_token: ${{ steps.auth.outputs.token }}
