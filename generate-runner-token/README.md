@@ -13,13 +13,13 @@ The Generate Runner Token Action is a GitHub Action that generates a token for a
     
 1.  **Github Repository Secrets**:
     
-    **AZURE_SUBSCRIPTION_ID**: This is a unique identifier for your Azure subscription. It's required to specify which Azure subscription you want to access.
+    **`AZURE_SUBSCRIPTION_ID`**: This is a unique identifier for your Azure subscription. It's required to specify which Azure subscription you want to access.
 
-    **AZURE_CLIENT_ID**: (Service Principal ID): When you create a Service Principal in Azure, you receive a unique identifier known as the Client ID. This ID is used to authenticate your application or pipeline with Azure.
+    **`AZURE_CLIENT_ID`**: (Service Principal ID): When you create a Service Principal in Azure, you receive a unique identifier known as the Client ID. This ID is used to authenticate your application or pipeline with Azure.
 
-    **AZURE_CLIENT_SECRET**: (Service Principal Secret): Along with the Client ID, you also receive a Client Secret when creating a Service Principal. The Client Secret acts as the password for the Service Principal and is used for authentication.
+    **`AZURE_CLIENT_SECRET`**: (Service Principal Secret): Along with the Client ID, you also receive a Client Secret when creating a Service Principal. The Client Secret acts as the password for the Service Principal and is used for authentication.
 
-    **AZURE_TENANT_ID**: Azure Tenant ID is a unique identifier for your Azure Active Directory (AD) tenant. It's required for authentication and authorization processes.
+    **`AZURE_TENANT_ID`**: Azure Tenant ID is a unique identifier for your Azure Active Directory (AD) tenant. It's required for authentication and authorization processes.
 
 2.  **GitHub App Configuration**:
     
@@ -33,9 +33,9 @@ The Generate Runner Token Action is a GitHub Action that generates a token for a
 
 To use the Generate Runner Token Action in your GitHub Actions workflow, you need to provide the following inputs:
 
-- **org_name**: The Github organization the repository resides in.
-- **repo_name**: The name of the repository the runner will be registered to.
-- **github_token**: The token used for authorization of API requests to Github.
+- **`org_name`**: The Github organization the repository resides in.
+- **`repo_name`**: The name of the repository the runner will be registered to.
+- **`github_token`**: The token used for authorization of API requests to Github.
 
 Here's an example workflow that uses the Generate Runner Token Action:
 
