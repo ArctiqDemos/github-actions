@@ -20,3 +20,4 @@ if __name__ == "__main__":
     token = generate_token()
     if token:
         print(f"::set-output name=runner_token::{token}")
+        print(token)
