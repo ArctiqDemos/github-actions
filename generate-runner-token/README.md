@@ -1,6 +1,6 @@
 # Generate Runner Token Action
 
-The Generate Runner Token Action is a GitHub Action that generates a token for a GitHub App installation using the GitHub App's private key stored securely in Azure Key Vault.
+The Generate Runner Token Action is an action that returns a registration token that can be used by developers to quickly get a token to register a runner to a repository.
 
 ### Prerequisites:
 
