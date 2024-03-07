@@ -10,4 +10,4 @@ RUN pip install --upgrade pip && \
 
 COPY . /action
 
-ENTRYPOINT ["python", "/action/generate_token.py"]
+ENTRYPOINT ["python", "/action/main.py"]

@@ -11,18 +11,15 @@ The Generate App Token Action is a GitHub Action that generates a token for a Gi
 
 ### Setup Instructions:
     
-1.  **Create Secrets**:
+1.  **Github Repository Secrets**:
     
-    Create a repository secret called `AZURE_CREDENTIALS` with the following:
-    
-    ```json
-    {
-    "clientId": "<YOUR_CLIENT_ID>",
-    "clientSecret": "<YOUR_CLIENT_SECRET>",
-    "subscriptionId": "<YOUR_SUBSCRIPTION_ID>",
-    "tenantId": "<YOUR_TENANT_ID>",
-    }
-    ```
+    **AZURE_SUBSCRIPTION_ID**: This is a unique identifier for your Azure subscription. It's required to specify which Azure subscription you want to access.
+
+    **AZURE_CLIENT_ID**: (Service Principal ID): When you create a Service Principal in Azure, you receive a unique identifier known as the Client ID. This ID is used to authenticate your application or pipeline with Azure.
+
+    **AZURE_CLIENT_SECRET**: (Service Principal Secret): Along with the Client ID, you also receive a Client Secret when creating a Service Principal. The Client Secret acts as the password for the Service Principal and is used for authentication.
+
+    **AZURE_TENANT_ID**: Azure Tenant ID is a unique identifier for your Azure Active Directory (AD) tenant. It's required for authentication and authorization processes.
 
 3.  **GitHub App Configuration**:
     
@@ -30,9 +27,8 @@ The Generate App Token Action is a GitHub Action that generates a token for a Gi
     
     *   GitHub App ID (`app_id`)
     *   GitHub App Installation ID (`installation_id`)
-    *   GitHub App Token (`token`)
-    *   Azure Key Vault URL (`vault_url`)
-    *   Azure Key Vault Secret Name (`secret_name`)
+    *   Azure Key Vault URL (`kv_url`)
+    *   Azure Key Vault Secret Name (`kv_secret_name`)
 
 ## Usage
 
@@ -46,11 +42,10 @@ To use the Generate App Token Action in your GitHub Actions workflow, you need t
 Here's an example workflow that uses the Generate App Token Action:
 
 ```yaml
-name: Generate GitHub App Token
+name: Generate Temporary GitHub App Token
 
 on:
   workflow_dispatch:
-
 
 jobs:
   generate-token:
@@ -59,21 +54,21 @@ jobs:
       token: ${{ steps.generate.outputs.token }}
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Generate GitHub App Token
       id: generate
-      uses: ArctiqTeam/a-github-actions/generate-app-token@main
+      uses: ArctiqDemos/github-actions/generate-app-token@main
       with:
-        app_id: ${{ secrets.APP_ID }}
-        installation_id: ${{ secrets.INSTALLATION_ID }}
-        kv_url: ${{ secrets.KV_URL }}
-        kv_secret_name: ${{ secrets.KV_SECRET_NAME }}
-        azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+        app_id: 849736
+        installation_id: 48083491
+        kv_url: https://github-secret-store.vault.azure.net
+        kv_secret_name: safe-settings-test
+        azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        azure_subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        azure_tenant: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Get Org Repos
+    - name: Get Self Hosted Runner Credential
       run: |
-        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"  
+        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"   
 
 ```

@@ -1,0 +1,21 @@
+name: Generate GitHub App Token
+description: Generate a temporary GitHub App token and set it as an output variable
+
+inputs:
+  github_token:
+    description: 'The ID of the GitHub App'
+    required: true
+  org_name:
+    description: 'The installation ID of the GitHub App.'
+    required: true
+  repo_name:
+    description: 'The URL of the Azure Key Vault where the GitHub App private key is stored.'
+    required: true
+
+outputs:
+  token:
+    description: 'The generated GitHub runner registration token'
+
+runs:
+  using: docker
+  image: Dockerfile
