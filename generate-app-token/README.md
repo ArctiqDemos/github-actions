@@ -55,7 +55,7 @@ jobs:
 
     steps:
     - name: Generate GitHub App Token
-      id: generate
+      id: auth
       uses: ArctiqDemos/github-actions/generate-app-token@main
       with:
         app_id: 849736
@@ -69,5 +69,5 @@ jobs:
 
     - name: Get Github Repos
       run: |
-        curl -H "Authorization: Bearer ${{ steps.generate.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
+        curl -H "Authorization: Bearer ${{ steps.auth.outputs.token }}" "https://api.github.com/orgs/ArctiqDemos/repos"
 ```
